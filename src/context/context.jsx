@@ -66,6 +66,7 @@ const ContextProvider = (props) => {
         product,
         setProduct,
         handleAddProduct,
+        // user,
         // loggedInUser,
         // setLoggedInUser,
       }}

@@ -6,6 +6,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 function ProductTable() {
   const [products, setProducts] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
 
   const navigate = useNavigate();
   const handleGetProducts = async () => {
@@ -15,6 +16,7 @@ function ProductTable() {
       const q = query(
         collection(db, "products"),
         where("uid", "==", user.user.uid)
+        // orderBy("time")
       );
       const querySnapshot = await getDocs(q);
       console.log(querySnapshot);
@@ -49,6 +51,15 @@ function ProductTable() {
     console.log("Edit");
     navigate("/updateproduct", { state: { item } });
   };
+
+  const [search, setSearch] = useState("");
+  console.log(search);
+
+  const filterProducts = products.filter((item) => {
+    console.log(item.title);
+    return item.title.includes(search);
+  });
+  console.log(filterProducts);
   return (
     <div>
       <div className=" flex justify-center items-center h-screen">
@@ -56,6 +67,8 @@ function ProductTable() {
           <div className="relative overflow-x-auto shadow-md sm:rounded-xl">
             <div className=" bg-[#2f3640] w-[50.1em] w-full flex items-center justify-between p-2">
               <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 type="text"
                 className="w-80 py-1.5 rounded-md px-2 outline-none shadow-[inset_0_0_4px_rgba(0,0,0,0.6)] text-white bg-gray-600 placeholder-gray-300"
                 placeholder="Search here"
@@ -104,10 +117,10 @@ function ProductTable() {
                 </tr>
               </thead>
               <tbody className="text-center">
-                {products.length > 0 ? (
-                  products.map((val, i) => (
+                {filterProducts.length > 0 ? (
+                  filterProducts.map((val, i) => (
                     <tr className="bg-gray-700 border-b text-white " key={i}>
-                      <td className="px-6 py-4 text-left">1.</td>
+                      <td className="px-6 py-4 text-left">{i + 1}</td>
                       <td className="px-6 py-4 text-left">
                         <img
                           className="w-20"

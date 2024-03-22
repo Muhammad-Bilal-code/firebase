@@ -5,7 +5,9 @@ import { myContext } from "../context/context";
 function AddProduct() {
   let context = useContext(myContext);
   // console.log(context);
+  let user = JSON.parse(localStorage.getItem("user"));
   const { product, setProduct, handleAddProduct } = context;
+  console.log(user);
   // console.log(product);
   // console.log(setProduct);
   return (
@@ -38,7 +40,11 @@ function AddProduct() {
             <input
               value={product.title}
               onChange={(e) =>
-                setProduct({ ...product, [e.target.name]: e.target.value })
+                setProduct({
+                  ...product,
+                  [e.target.name]: e.target.value,
+                  uid: user.user.uid,
+                })
               }
               type="text"
               name="title"
@@ -50,7 +56,11 @@ function AddProduct() {
             <input
               value={product.price}
               onChange={(e) =>
-                setProduct({ ...product, [e.target.name]: e.target.value })
+                setProduct({
+                  ...product,
+                  [e.target.name]: e.target.value,
+                  uid: user.user.uid,
+                })
               }
               type="text"
               name="price"
@@ -62,7 +72,11 @@ function AddProduct() {
             <input
               value={product.imageUrl}
               onChange={(e) =>
-                setProduct({ ...product, [e.target.name]: e.target.value })
+                setProduct({
+                  ...product,
+                  [e.target.name]: e.target.value,
+                  uid: user.user.uid,
+                })
               }
               type="text"
               name="imageUrl"
@@ -74,7 +88,11 @@ function AddProduct() {
             <input
               value={product.category}
               onChange={(e) =>
-                setProduct({ ...product, [e.target.name]: e.target.value })
+                setProduct({
+                  ...product,
+                  [e.target.name]: e.target.value,
+                  uid: user.user.uid,
+                })
               }
               type="text"
               name="category"
