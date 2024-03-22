@@ -37,7 +37,7 @@ function Card() {
       ) : (
         <div className="flex flex-wrap px-4 lg:px-10">
           {product.map((item, i) => {
-            console.log(item);
+            // console.log(item);
             return (
               <div className="p-2 md:w-1/4 w-full" key={i}>
                 <div className="bg-[#ffffff] p-3 rounded-2xl shadow-[inset_0_0px_3px_rgba(0,0,0,0.6)] hover:-translate-y-1">

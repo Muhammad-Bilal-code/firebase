@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../firebaseone/FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { myContext } from "../../context/context";
 
 function Login() {
+  // let context = useContext(myContext);
+  // console.log(context);
+  // const { loggedInUser, setLoggedInUser } = context;
+  // console.log(loggedInUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,7 +21,9 @@ function Login() {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       localStorage.setItem("user", JSON.stringify(user));
+      console.log(user);
       alert("Login Successful");
+      // setLoggedInUser(user);
       setEmail("");
       setPassword("");
       navigate("/");
